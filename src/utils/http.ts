@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useUserStore } from "@/stores/user";
-const userStore = useUserStore();
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+// const userStore = useUserStore()
 
 export const http = axios.create({
   baseURL: 'http://127.0.0.1:8000/api'
@@ -12,21 +12,23 @@ http.interceptors.request.use(
     // if (userStore.user.token !== "") {
     //   config.headers["Authorization"] = userStore.user.token;
     // }
-    return config;
+    // config.log(config)
+    return config
   },
   (error) => {
     // 对请求错误做些什么
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 // 添加响应拦截器
 http.interceptors.response.use(
   (response) => {
     // 2xx 范围内的状态码触发该函数。
-    return response.data;
+    console.log(response)
+    return response.data
   },
   (error) => {
     // 超出 2xx 范围的状态码触发该函数。
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
