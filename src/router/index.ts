@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '../views/login/LoginView.vue'
 import Current from '../views/alarms/current/current.vue'
-import Query from '../views/alarms/current/query.vue'
+import Query from '../views/alarms/query/query.vue'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -40,12 +40,12 @@ const router = createRouter({
         {
           path: '/query',
           name: 'query',
-          component: () => import('../views/alarms/current/query.vue')
+          component: () => import('../views/alarms/query/query.vue')
         },
         {
           path: '/manage',
           name: 'manage',
-          component: () => import('../views/alarms/current/manage.vue')
+          component: () => import('../views/alarms/manage/manage.vue')
         },
       ]
     },

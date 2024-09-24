@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { RouterView } from 'vue-router';
-import { ArrowRight } from '@element-plus/icons-vue'
+import { ArrowRight,SwitchButton } from '@element-plus/icons-vue'
+import { Ref } from 'vue';
 
 import { Warning, Operation, VideoCamera, Picture, Calendar } from '@element-plus/icons-vue'
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -10,11 +11,21 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
+
 </script>
 <template>
     <el-header class="header">
         YOLO算法盒子
+        <RouterLink style="margin-left: 85%;" active-class="active" :to="{ name: 'login' }">
+            <el-icon>
+                <SwitchButton />
+            </el-icon>
+        </RouterLink>
+        userName
+
     </el-header>
+
 
     <el-container style="max-width: 100vw;">
         <el-aside style="min-height: 90vh; max-width: 150px;">
@@ -96,5 +107,9 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 .active-item span{
     color: rgb(150, 29, 29);
+}
+.el-icon {
+width: 20px;
+height: 20px;
 }
 </style>
