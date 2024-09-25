@@ -5,15 +5,15 @@
                 </div>
                 <el-table :data="tableData" border style="width: 40%;  margin-left: 20px;"
                         :row-class-name="tableRowClassName">
-                        <el-table-column prop="date" label="序号" width="100" />
-                        <el-table-column prop="name" label="网络摄像头名称" width="140" />
-                        <el-table-column prop="zhuangtai" label="通道状态" style="width: 10%;">
+                        <el-table-column prop="date" label="序号" width="100" align="center" />
+                        <el-table-column prop="name" label="网络摄像头名称" width="140" align="center" />
+                        <el-table-column prop="zhuangtai" label="通道状态" style="width: 10%;" align="center">
                                 <template #default="scope">
                                         <el-tag type="success" v-if="scope.row.status">在线</el-tag>
                                         <el-tag type="info" v-else>未配置</el-tag>
                                 </template>
                         </el-table-column>
-                        <el-table-column prop="address" label="详细信息" />
+                        <el-table-column prop="address" label="详细信息" align="center" />
                 </el-table>
         </div>
 </template>
