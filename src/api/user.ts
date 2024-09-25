@@ -40,7 +40,7 @@ export const register = (
   return http.post('/register', json)
 }
 
-//退出登录
+//退出登录/logout
 export const logout = (): any => {
   return http.post('/alarms/logout')
 }
