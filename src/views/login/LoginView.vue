@@ -40,7 +40,7 @@ const login = async () => {
 //   if (res.code === 0) {
 //     router.push('/doctor/patientManagement')
 //   }
-//   router.push('/current')
+// router.push('/current')
 // }
 </script>
 

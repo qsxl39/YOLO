@@ -20,7 +20,7 @@ export const postDoctorLoginAPI = (username: string, Password: string): any => {
   return http.post('/login', json)
 }
 /**
- * 注册
+ * 注册 /register
  * @param {string} usernameRegister 准备注册的用户名
  * @param {string} passwordOne 第一次输入的密码
  * @param {string} passwordTwo 第二次输入的密码
@@ -41,31 +41,32 @@ export const register = (
 }
 
 //退出登录
-export const getDeleteByIdAPI = (id: Number): any => {
-  // return http.delete('/patients/deleteById'),{
-  //   params:{
-  //     id
-  //   }
-  // }
-  return http({
-    url: `/patients/deleteById?id=${id}`,
-    method: 'delete'
-  })
+export const logout = (): any => {
+  return http.post('/alarms/logout')
 }
 
-// /**
-//  * @param total
-//  */
-// //分页  /alarm/query/pages
-// export const pages = (all_data: string, page_num: number, url: string): any => {
-//   const any = {
-//     total,
-//     current_page,
-//     url
-//   }
-//   const json = JSON.stringify(any)
-//   return http.post('/alarm/query/pages', json)
-// }
+//分页  /alarm/query/pages
+/**
+ * @param all_data 所有数据
+ * @param page_num 获取当前页码
+ * @param paginator 每页显示的数量
+ * @param page_obj 根据页码获取当前页的对象
+ */
+export const pages = (
+  all_data: string,
+  page_num: number,
+  paginator: number,
+  page_obj: any
+): any => {
+  const any = {
+    all_data,
+    page_num,
+    paginator,
+    page_obj
+  }
+  const json = JSON.stringify(any)
+  return http.post('/alarm/query/pages', json)
+}
 
 //新增患者/user.ts
 export const getAddPatientAPI = (data: object) => {
