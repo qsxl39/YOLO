@@ -45,7 +45,7 @@ export const register = (
 
 //退出登录/logout
 export const logout = (): any => {
-  return http.post('/alarms/logout')
+  return http.post('/logout')
 }
 
 //分页  /alarm/query/pages
@@ -71,14 +71,82 @@ export const pages = (
   return http.post('/alarm/query/pages', json)
 }
 
-//新增患者/user.ts
-export const getAddPatientAPI = (data: object) => {
+//图片查询/alarms/query/search
+export const search = (
+  pic_channel: string,
+  pic_type: string,
+  pic_time_start: number,
+  pic_time_end: number
+) => {
   // return http.post('/patients/save')
-  return http({
-    url: '/patients/save',
-    method: 'post',
-    data
+  return http.post('/alarms/query/search', {
+    pic_channel,
+    pic_type,
+    pic_time_start,
+    pic_time_end
   })
+}
+
+//导出结果
+export const download = (
+  pic_channel: string,
+  pic_type: string,
+  pic_time_start: number,
+  pic_time_end: number
+): any => {
+  return http.post('/alarms/download', {
+    pic_channel,
+    pic_type,
+    pic_time_start,
+    pic_time_end
+  })
+}
+
+//重启通道/channel/manage/restart/channel
+export const channel = (the_id: string): any => {
+  return http.post('/channel/manage/restart/channel', {
+    the_id
+  })
+}
+
+//重启配置/channel/manage/restart/setting
+export const restart = (the_id: string): any => {
+  return http.post('/channel/manage/restart/setting', { the_id })
+}
+
+//删除记录/alarms/query/delete
+export const queryDelete = (): any => {
+  return http.delete('alarms/query/delete')
+}
+
+//通道管理设置
+export const setting = (
+  the_id: string,
+  satuation: string,
+  address: string,
+  channel_name: string,
+  caqu_settings: string,
+  open_close: boolean,
+  degree: string,
+  pinglv: string,
+  updatetime: number
+): any => {
+  return http.post('/channel/manage/setting', {
+    the_id,
+    satuation,
+    address,
+    channel_name,
+    caqu_settings,
+    open_close,
+    degree,
+    pinglv,
+    updatetime
+  })
+}
+
+//通道信息呈现
+export const show = (the_id: string) => {
+  return http.post('/alarms/current/show', { the_id })
 }
 
 //批量患者删除
