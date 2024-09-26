@@ -49,34 +49,16 @@ export const logout = (): any => {
 }
 
 //分页  /alarm/query/pages
-/**
- * @param all_data 所有数据
- * @param page_num 获取当前页码
- * @param paginator 每页显示的数量
- * @param page_obj 根据页码获取当前页的对象
- */
-export const pages = (
-  all_data: string,
-  page_num: number,
-  paginator: number,
-  page_obj: any
-): any => {
-  const any = {
-    all_data,
-    page_num,
-    paginator,
-    page_obj
-  }
-  const json = JSON.stringify(any)
-  return http.post('/alarm/query/pages', json)
+export const pages = (): any => {
+  return http.post('/alarm/query/pages')
 }
 
 //图片查询/alarms/query/search
 export const search = (
   pic_channel: string,
   pic_type: string,
-  pic_time_start: number,
-  pic_time_end: number
+  pic_time_start: string,
+  pic_time_end: string
 ) => {
   // return http.post('/patients/save')
   return http.post('/alarms/query/search', {
@@ -91,8 +73,8 @@ export const search = (
 export const download = (
   pic_channel: string,
   pic_type: string,
-  pic_time_start: number,
-  pic_time_end: number
+  pic_time_start: string,
+  pic_time_end: string
 ): any => {
   return http.post('/alarms/download', {
     pic_channel,
@@ -129,7 +111,7 @@ export const setting = (
   open_close: boolean,
   degree: string,
   pinglv: string,
-  updatetime: number
+  updatetime: string
 ): any => {
   return http.post('/channel/manage/setting', {
     the_id,

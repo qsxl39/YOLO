@@ -19,15 +19,15 @@ const router = createRouter({
       path: '/current',
       name: 'current',
       // component: () => import('@/views/alarms/current/current.vue'),
-      component:Current
+      component: Current
     },
     {
       path: '/query',
       name: 'query',
       // component: () => import('@/views/alarms/current/query.vue'),
-      component:Query
+      component: Query
     },
-        {
+    {
       path: '/alarms',
       name: 'alarms',
       component: () => import('../views/alarms/View.vue'),
@@ -46,10 +46,29 @@ const router = createRouter({
           path: '/manage',
           name: 'manage',
           component: () => import('../views/alarms/manage/manage.vue')
-        },
+        }
       ]
-    },
+    }
   ]
 })
+
+// import { http } from '@/utils/http'
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/query') {
+//     http
+//       .post('/alarm/query/pages')
+//       .then((res) => {
+//         console.log(res)
+//         next()
+//       })
+//       .catch((error) => {
+//         // 处理错误
+//         next(error)
+//       })
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

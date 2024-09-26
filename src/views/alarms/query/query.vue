@@ -12,14 +12,14 @@
   >
     <el-form-item style="width: 160px" prop="region">
       <el-select v-model="ruleForm.region" placeholder="选择通道">
-        <el-option label="通道一" value="yi" />
-        <el-option label="通道二" value="er" />
+        <el-option label="通道一" value="channel1" />
+        <el-option label="通道二" value="channel2" />
       </el-select>
     </el-form-item>
     <el-form-item style="width: 160px" prop="region2">
       <el-select v-model="ruleForm.region2" placeholder="告警类型">
-        <el-option label="人数统计" value="renshu" />
-        <el-option label="车辆统计" value="cheliang" />
+        <el-option label="人数统计" value="人数统计" />
+        <el-option label="车辆统计" value="车辆统计" />
       </el-select>
     </el-form-item>
 
@@ -49,13 +49,9 @@
       </el-col>
     </el-form-item>
     <el-form-item>
-      <el-button type="success" plain :icon="Search" @click="submitForm(ruleFormRef)">
-        查询记录
-      </el-button>
-      <el-button type="danger" plain :icon="Delete" @click="submitForm(ruleFormRef)">
-        删除记录
-      </el-button>
-      <el-button type="primary" plain @click="resetForm(ruleFormRef)">
+      <el-button type="success" plain :icon="Search" @click="submitForm()"> 查询记录 </el-button>
+      <el-button type="danger" plain :icon="Delete" @click="QueryDelete()"> 删除记录 </el-button>
+      <el-button type="primary" plain @click="resetForm()">
         导出记录<el-icon class="el-icon--right"> <Upload /> </el-icon
       ></el-button>
     </el-form-item>
@@ -160,8 +156,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
+import {
+  pageHeaderEmits,
+  type ComponentSize,
+  type FormInstance,
+  type FormRules
+} from 'element-plus'
 import { Delete, Search, Upload } from '@element-plus/icons-vue'
+import { pages } from '@/api/user'
 
 interface RuleForm {
   region: string
@@ -215,23 +217,49 @@ const rules = reactive<FormRules<RuleForm>>({
   ]
 })
 
-const submitForm = async (formEl: FormInstance | undefined) => {
+import { search } from '@/api/user'
+
+const submitForm = async () => {
+  const arrar = {
+    pic_channel: ruleForm.region,
+    pic_type: ruleForm.region2,
+    pic_time_start: ruleForm.date1,
+    pic_time_end: ruleForm.date2
+  }
   console.log('已查询')
-  console.log(ruleForm.region)
-  console.log(ruleForm.region2)
-  if (!formEl) return
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log('submit!')
-    } else {
-      console.log('error submit!', fields)
-    }
-  })
+  console.log(arrar)
+  try {
+    const res = await search(ruleForm.region, ruleForm.region2, ruleForm.date1, ruleForm.date2)
+    console.log(res)
+  } catch {}
+  //   if (!formEl) return
+  //   await formEl.validate((valid, fields) => {
+  //     if (valid) {
+  //       console.log('submit!')
+  //     } else {
+  //       console.log('error submit!', fields)
+  //     }
+  //   })
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
+import { download } from '@/api/user'
+
+const resetForm = () => {
+  try {
+    const res = download(ruleForm.region, ruleForm.region2, ruleForm.date1, ruleForm.date2)
+    console.log(res)
+  } catch {}
+  // if (!formEl) return
+  // formEl.resetFields()
+}
+
+import { queryDelete } from '@/api/user';
+
+const QueryDelete=()=>{
+  try{
+    const res=queryDelete()
+    console.log(res)
+  }
 }
 
 // fewcode
