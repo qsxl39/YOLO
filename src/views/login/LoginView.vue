@@ -19,11 +19,11 @@ const login = async () => {
     console.log(res)
     if (res.code === 200) {
       ElMessage.success('登录成功')
-      // if (loginData.value.username === 'admin') {
-      //   userStore.setUser(loginData.value.username, 'admin')
-      // } else {
-      //   userStore.setUser(loginData.value.username, 'doctor')
-      // }
+      if (loginData.value.username === 'admin') {
+        userStore.setUser(loginData.value.username, 'admin')
+      } else {
+        userStore.setUser(loginData.value.username, 'doctor')
+      }
       router.push('/current')
       return
     } else {

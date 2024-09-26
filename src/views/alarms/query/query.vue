@@ -231,15 +231,16 @@ const submitForm = async () => {
   try {
     const res = await search(ruleForm.region, ruleForm.region2, ruleForm.date1, ruleForm.date2)
     console.log(res)
+    console.log('查询成功')
   } catch {}
-  //   if (!formEl) return
-  //   await formEl.validate((valid, fields) => {
-  //     if (valid) {
-  //       console.log('submit!')
-  //     } else {
-  //       console.log('error submit!', fields)
-  //     }
-  //   })
+  // if (!formEl) return
+  // await formEl.validate((valid, fields) => {
+  //   if (valid) {
+  //     console.log('submit!')
+  //   } else {
+  //     console.log('error submit!', fields)
+  //   }
+  // })
 }
 
 import { download } from '@/api/user'
@@ -248,18 +249,20 @@ const resetForm = () => {
   try {
     const res = download(ruleForm.region, ruleForm.region2, ruleForm.date1, ruleForm.date2)
     console.log(res)
+    console.log('下载成功')
   } catch {}
   // if (!formEl) return
   // formEl.resetFields()
 }
 
-import { queryDelete } from '@/api/user';
+import { queryDelete } from '@/api/user'
 
-const QueryDelete=()=>{
-  try{
-    const res=queryDelete()
+const QueryDelete = () => {
+  try {
+    const res = queryDelete('channel1/人数统计-20240913-1357.jpg')
     console.log(res)
-  }
+    console.log('删除成功')
+  } catch {}
 }
 
 // fewcode

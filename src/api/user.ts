@@ -50,7 +50,7 @@ export const logout = (): any => {
 
 //分页  /alarm/query/pages
 export const pages = (): any => {
-  return http.post('/alarm/query/pages')
+  return http.post('/alarms/query/pages')
 }
 
 //图片查询/alarms/query/search
@@ -98,7 +98,7 @@ export const restart = (the_id: string): any => {
 
 //删除记录/alarms/query/delete
 export const queryDelete = (): any => {
-  return http.delete('alarms/query/delete')
+  return http.delete(`alarms/query/delete`)
 }
 
 //通道管理设置

@@ -7,7 +7,7 @@ import { pages } from '@/api/user'
 // }
 export const filterList = [
   {
-    img: 'http://news.sznews.com/pic/2020-08/14/9d9c9a60-f0af-41aa-b617-683b07c87642.jpg',
+    img: ' http://74zbyd.natappfree.cc/media/channel1/人数统计-20240913-1357.jpg',
     title: '嘉陵江2020年第1号洪水”在嘉陵江支流涪江形成',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),

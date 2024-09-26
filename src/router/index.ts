@@ -52,12 +52,30 @@ const router = createRouter({
   ]
 })
 
-// import { http } from '@/utils/http'
+import { http } from '@/utils/http'
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/query') {
+    http
+      .post('/alarms/query/pages')
+      .then((res) => {
+        console.log('分页成功')
+        console.log(res)
+        next()
+      })
+      .catch((error) => {
+        // 处理错误
+        next(error)
+      })
+  } else {
+    next()
+  }
+})
 
 // router.beforeEach((to, from, next) => {
-//   if (to.path === '/query') {
+//   if (to.path === '/manage') {
 //     http
-//       .post('/alarm/query/pages')
+//       .post('/alarms/current/show')
 //       .then((res) => {
 //         console.log(res)
 //         next()
