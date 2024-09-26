@@ -11,13 +11,16 @@ export const postDoctorLoginAPI = (username: string, Password: string): any => {
   //   username: username,
   //   password: Password
   // })
-  const any = {
+  // const any = {
+  //   username: username,
+  //   password: Password
+  // }
+  // const json = JSON.stringify(any)
+  // console.log(json)
+  return http.post('/login', {
     username: username,
     password: Password
-  }
-  const json = JSON.stringify(any)
-  console.log(json)
-  return http.post('/login', json)
+  })
 }
 /**
  * 注册 /register
