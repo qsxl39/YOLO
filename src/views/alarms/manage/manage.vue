@@ -31,46 +31,18 @@
       <template #default="scope">{{ scope.row.shijian }}</template>
     </el-table-column>
   </el-table>
-
   <!-- 对话框 -->
-  <el-dialog v-model="dialogTableVisible" title="算法配置" width="1100">
-    <el-table border stripe :data="gridData">
-      <el-table-column property="mingcheng" label="算法名称" width="120" align="center" />
-      <el-table-column property="zhuangtai" label="开关状态" width="120" align="center">
-        <template #default="">
-          <el-switch
-            v-model="value1"
-            size="large"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column property="lingmindu" label="灵敏度" width="600" align="center">
-        <div class="slider-demo-block">
-          <el-slider v-model="value" show-input />
-        </div>
-      </el-table-column>
-      <el-table-column property="pinlv" label="上报频率" align="center">
-        <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
-      </el-table-column>
-      <el-button type="primary"> 保存 </el-button>
-      <el-button>取消</el-button>
-    </el-table>
-  </el-dialog>
+  <myDialog/>
+
 </template>
 
 <script lang="ts" setup>
 import { ElTable, ElInput } from 'element-plus'
 import { Setting } from '@element-plus/icons-vue'
+import myDialog from './myDialog.vue';
 
-const value = ref(0)
-const value1 = ref(true)
-const num = ref(1)
-const handleChange = (value: number) => {
-  console.log(value)
-}
+
+
 
 interface User {
   number: string
@@ -104,36 +76,5 @@ const tableData: User[] = [
 ]
 
 // 对话框
-import { ref } from 'vue'
 
-const dialogTableVisible = ref(false)
-
-interface biao {
-  mingcheng: string
-  zhuangtai: boolean
-  lingmindu: string
-  pinlv: string
-}
-
-const gridData: biao = [
-  {
-    mingcheng: '人数统计',
-    zhuangtai: true,
-    lingmindu: 'John Smith',
-    pinlv: 'John Smith'
-  }
-]
 </script>
-
-<style scoped>
-.slider-demo-block {
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-}
-
-.slider-demo-block .el-slider {
-  margin-top: 0;
-  margin-left: 12px;
-}
-</style>

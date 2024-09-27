@@ -11,7 +11,7 @@ import App from './App.vue'
 import Prism from 'prismjs'
 import router from './router'
 import myDialog from "./views/alarms/manage/myDialog.vue"
-import Vue from 'vue';  
+
 const app = createApp(App)
 
 app.use(pinia)
@@ -24,5 +24,6 @@ VueMarkdownEditor.use(vuepressTheme, {
 
 app.use(VueMarkdownEditor)
 
+app.component('myDialog', myDialog)
+
 app.mount('#app')
-Vue.component('myDialog', myDialog);  
