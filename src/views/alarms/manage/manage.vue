@@ -20,7 +20,7 @@
     </el-table-column>
     <el-table-column prop="peizhi" label="算法配置" style="width: 10%" align="center">
       <template #default="">
-        <el-icon color="#409efc" class="no-inherit" :size="20" @click="dialogTableVisible = true">
+        <el-icon color="#409efc" class="no-inherit" :size="20" @click="handleSettingClick(scope.$index, scope.row)">
           <setting />
         </el-icon>
       </template>
@@ -40,6 +40,8 @@
 import { ElTable, ElInput } from 'element-plus'
 import { Setting } from '@element-plus/icons-vue'
 import myDialog from './myDialog.vue';
+
+//绑定事件
 
 
 

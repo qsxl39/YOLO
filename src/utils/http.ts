@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 // const userStore = useUserStore()
 
 export const http = axios.create({
-  baseURL: ' http://74zbyd.natappfree.cc/api'
+  baseURL: ' http://9zb6ar.natappfree.cc'
 })
 // 添加请求拦截器
 http.interceptors.request.use(
