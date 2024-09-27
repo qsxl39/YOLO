@@ -13,6 +13,7 @@
                         <el-table-column prop="zhuangtai" label="通道状态" style="width: 10%;" align="center">
                                 <template #default="scope">
                                         <el-tag type="success" v-if="scope.row.status">在线</el-tag>
+                                        <el-tag type="danger" v-if="scope.row.status">离线</el-tag>
                                         <el-tag type="info" v-else>未配置</el-tag>
                                 </template>
                         </el-table-column>
@@ -101,6 +102,11 @@ const tableData: User[] = [
         {
                 date: '03',
                 name: 'ID-02',
+                address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+                date: '04',
+                name: 'ID-03',
                 address: 'No. 189, Grove St, Los Angeles',
         },
 

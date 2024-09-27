@@ -4,8 +4,10 @@
     <el-table-column prop="number" label="序号" style="width: 10%" align="center" />
     <el-table-column prop="zhuangtai" label="通道状态" style="width: 10%" align="center">
       <template #default="scope">
-        <el-tag type="success" v-if="scope.row.zhuangtai">在线</el-tag>
-        <el-tag type="info" v-else>未配置</el-tag>
+        <el-tag
+          :type="scope.row.zhuangtai === 'success' ? 'success' : scope.row.zhuangtai === 'fail' ? 'danger' : 'info'">
+          {{ scope.row.zhuangtai === 'success' ? '在线' : scope.row.zhuangtai === 'fail' ? '离线' : '未配置' }}
+        </el-tag>
       </template>
     </el-table-column>
     <el-table-column prop="dizhi" label="RTSP地址" style="width: 10%" align="center">
@@ -32,8 +34,8 @@
     </el-table-column>
   </el-table>
   <div class="dialog-footer" style="margin: 5px;">
-    <el-button >重启通道</el-button>
-    <el-button >重置配置</el-button>
+    <el-button>重启通道</el-button>
+    <el-button>重置配置</el-button>
   </div>
   <!-- 对话框 -->
   <el-dialog v-model="dialogTableVisible" title="算法配置" width="1100">
@@ -97,19 +99,20 @@ const saveChanges = () => {
 
 
 interface User {
-  number: string
-  zhuangtai: boolean
-  dizhi: string
-  mingcheng: string
-  peizhi: string
-  zhouije: string
-  shijian: string
+  number: string;
+  zhuangtai: 'success' | 'fail' | 'not_configured'; // 修改为字符串类型  
+  dizhi: string;
+  mingcheng: string;
+  peizhi: string;
+  zhouije: string;
+  shijian: string;
 }
+
 
 const tableData: User[] = [
   {
     number: '1',
-    zhuangtai: true,
+    zhuangtai: 'success',
     dizhi: 'rtsp://xxxx',
     mingcheng: 'ID-00',
     peizhi: 'ID-00',
@@ -118,7 +121,7 @@ const tableData: User[] = [
   },
   {
     number: '2',
-    zhuangtai: true,
+    zhuangtai: 'fail',
     dizhi: 'rtsp://xxxx',
     mingcheng: 'ID-01',
     peizhi: 'ID-00',
@@ -127,7 +130,7 @@ const tableData: User[] = [
   },
   {
     number: '3',
-    zhuangtai: true,
+    zhuangtai: 'not_configured',
     dizhi: 'rtsp://xxxx',
     mingcheng: 'ID-02',
     peizhi: 'ID-00',
@@ -136,7 +139,7 @@ const tableData: User[] = [
   },
   {
     number: '4',
-    zhuangtai: false,
+    zhuangtai: 'success',
     dizhi: 'rtsp://xxxx',
     mingcheng: 'ID-03',
     peizhi: 'ID-00',
