@@ -72,21 +72,26 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/manage') {
-//     http
-//       .post('/alarms/current/show')
-//       .then((res) => {
-//         console.log(res)
-//         next()
-//       })
-//       .catch((error) => {
-//         // 处理错误
-//         next(error)
-//       })
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/manage') {
+    var the_id: number = 1
+    for (the_id <= 4; ; ) {
+      console.log(the_id)
+      http
+        .post('/alarms/current/show', { the_id })
+        .then((res) => {
+          console.log(res)
+          next()
+        })
+        .catch((error) => {
+          // 处理错误
+          next(error)
+        })
+      the_id++
+    }
+  } else {
+    next()
+  }
+})
 
 export default router
