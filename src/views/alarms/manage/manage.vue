@@ -70,7 +70,10 @@
 <script lang="ts" setup>
 import { ElTable, ElInput } from 'element-plus'
 import { Setting } from '@element-plus/icons-vue'
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
+import { tableDataStore } from '@/stores/tableData'
+console.log('@@@', tableDataStore.$id);
+
 
 const dialogTableVisible = ref(false);
 
@@ -109,45 +112,9 @@ interface User {
 }
 
 
-const tableData: User[] = [
-  {
-    number: '1',
-    zhuangtai: 'success',
-    dizhi: 'rtsp://xxxx',
-    mingcheng: 'ID-00',
-    peizhi: 'ID-00',
-    zhouije: '4',
-    shijian: '2016-05-04 23:12:11'
-  },
-  {
-    number: '2',
-    zhuangtai: 'fail',
-    dizhi: 'rtsp://xxxx',
-    mingcheng: 'ID-01',
-    peizhi: 'ID-00',
-    zhouije: '4',
-    shijian: '2016-05-04 23:12:11'
-  },
-  {
-    number: '3',
-    zhuangtai: 'not_configured',
-    dizhi: 'rtsp://xxxx',
-    mingcheng: 'ID-02',
-    peizhi: 'ID-00',
-    zhouije: '4',
-    shijian: '2016-05-04 23:12:11'
-  },
-  {
-    number: '4',
-    zhuangtai: 'success',
-    dizhi: 'rtsp://xxxx',
-    mingcheng: 'ID-03',
-    peizhi: 'ID-00',
-    zhouije: '4',
-    shijian: '2016-05-04 23:12:11'
-  }
-]
 
+const store = tableDataStore();
+const tableData = computed(() => store.$state as User[]); // 使用 computed 来保持响应性   
 // 对话框
 
 </script>

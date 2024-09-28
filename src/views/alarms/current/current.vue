@@ -8,13 +8,15 @@
                 </div>
                 <el-table :data="tableData" border style="width: 40%;  margin-left: 20px;"
                         :row-class-name="tableRowClassName">
-                        <el-table-column prop="date" label="序号" width="100" align="center" />
-                        <el-table-column prop="name" label="网络摄像头名称" width="140" align="center" />
+                        <el-table-column prop="number" label="序号" width="100" align="center" />
+                        <el-table-column prop="mingcheng" label="网络摄像头名称" width="140" align="center" />
                         <el-table-column prop="zhuangtai" label="通道状态" style="width: 10%;" align="center">
                                 <template #default="scope">
-                                        <el-tag type="success" v-if="scope.row.status">在线</el-tag>
-                                        <el-tag type="danger" v-if="scope.row.status">离线</el-tag>
-                                        <el-tag type="info" v-else>未配置</el-tag>
+                                        <el-tag
+                                                :type="scope.row.zhuangtai === 'success' ? 'success' : scope.row.zhuangtai === 'fail' ? 'danger' : 'info'">
+                                                {{ scope.row.zhuangtai === 'success' ? '在线' : scope.row.zhuangtai ===
+                                                'fail' ? '离线' : '未配置' }}
+                                        </el-tag>
                                 </template>
                         </el-table-column>
                         <el-table-column prop="address" label="详细信息" align="center">
@@ -66,11 +68,17 @@
 
 <script lang="ts" setup>
 import { Warning, Camera } from '@element-plus/icons-vue'
+import { ref, computed } from 'vue';
+import { tableDataStore } from '@/stores/tableData'
 
 interface User {
-        date: string
-        name: string
-        address: string
+        number: string;
+        zhuangtai: 'success' | 'fail' | 'not_configured'; // 修改为字符串类型  
+        dizhi: string;
+        mingcheng: string;
+        peizhi: string;
+        zhouije: string;
+        shijian: string;
 }
 
 const tableRowClassName = ({
@@ -88,29 +96,9 @@ const tableRowClassName = ({
         return ''
 }
 
-const tableData: User[] = [
-        {
-                date: '01',
-                name: 'ID-00',
-                address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-                date: '02',
-                name: 'ID-01',
-                address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-                date: '03',
-                name: 'ID-02',
-                address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-                date: '04',
-                name: 'ID-03',
-                address: 'No. 189, Grove St, Los Angeles',
-        },
+const store = tableDataStore();
+const tableData = computed(() => store.$state as User[]); // 使用 computed 来保持响应性   
 
-]
 
 
 // 图片列表
