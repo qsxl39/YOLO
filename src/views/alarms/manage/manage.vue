@@ -21,8 +21,8 @@
       </template>
     </el-table-column>
     <el-table-column prop="peizhi" label="算法配置" style="width: 10%" align="center">
-      <template #default="">
-        <el-icon color="#409efc" class="no-inherit" :size="20" @click=" dialogTableVisible = true">
+      <template #default="scope">
+        <el-icon color="#409efc" class="no-inherit" :size="20" @click="open(scope.row.number)">
           <setting />
         </el-icon>
       </template>
@@ -33,72 +33,29 @@
       <template #default="scope">{{ scope.row.shijian }}</template>
     </el-table-column>
   </el-table>
-  <div class="dialog-footer" style="margin: 5px;">
-    <el-button>重启通道</el-button>
-    <el-button>重置配置</el-button>
-  </div>
   <!-- 对话框 -->
-  <el-dialog v-model="dialogTableVisible" title="算法配置" width="1100">
-    <el-table border stripe :data="gridData" style="width: 100%">
-      <el-table-column property="mingcheng" label="算法名称" width="120" align="center" />
-      <el-table-column label="开关状态" width="120" align="center">
-        <template #default="{ row }">
-          <el-switch v-model="row.zhuangtai" size="large" inline-prompt active-text="开" inactive-text="关" />
-        </template>
-      </el-table-column>
-      <el-table-column label="灵敏度" width="600" align="center">
-        <template #default="{ row }">
-          <div class="slider-demo-block">
-            <el-slider v-model="row.lingmindu" show-input :min="0" :max="100" />
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="上报频率" align="center">
-        <template #default="{ row }">
-          <el-input-number v-model="row.pinlv" :min="1" :max="10" />
-        </template>
-      </el-table-column>
-    </el-table>
-    <div class="dialog-footer" style="margin: 5px;">
-      <el-button type="primary" @click="saveChanges">保存</el-button>
-      <el-button @click="dialogTableVisible = false">取消</el-button>
-    </div>
-  </el-dialog>
-
+  <HistoryDialog ref="HistoryDialogRef" />
 </template>
 
 <script lang="ts" setup>
-import { ElTable, ElInput } from 'element-plus'
+import { ElTable, ElInput, SCOPE } from 'element-plus'
 import { Setting } from '@element-plus/icons-vue'
-import { ref,computed } from 'vue';
+// import myDialog from './myDialog.vue'
+import { defineAsyncComponent } from 'vue'
+import { ref, computed } from 'vue';
 import { tableDataStore } from '@/stores/tableData'
-console.log('@@@', tableDataStore.$id);
+import { log } from 'util';
+// import { log } from 'console';
+// import { Row } from 'element-plus/es/components/table-v2/src/components/index.mjs';
+// console.log('@@@', tableDataStore.$id);
 
+const HistoryDialog = defineAsyncComponent(() => import('./myDialog.vue'))
+const HistoryDialogRef = ref()
 
-const dialogTableVisible = ref(false);
-
-const gridData = ref([
-  {
-    mingcheng: '人数统计',
-    zhuangtai: true,
-    lingmindu: 50, // 假设灵敏度初始值为50  
-    pinlv: 1,      // 假设上报频率初始值为1  
-  },
-  {
-    mingcheng: '车辆统计',
-    zhuangtai: false,
-    lingmindu: 30, // 假设灵敏度初始值为30  
-    pinlv: 5,      // 假设上报频率初始值为5  
-  },
-]);
-
-const saveChanges = () => {
-  dialogTableVisible.value = false
-  console.log('保存的数据:', gridData.value);
-  // 这里可以添加将gridData发送到服务器的逻辑  
-};  
-
-
+const open = (number: string) => {
+  console.log('打开')
+  HistoryDialogRef.value.openDialog(number)
+};
 
 
 interface User {
@@ -116,19 +73,4 @@ interface User {
 const store = tableDataStore();
 const tableData = computed(() => store.$state as User[]); // 使用 computed 来保持响应性   
 // 对话框
-
 </script>
-
-
-<style scoped>
-.slider-demo-block {
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-}
-
-.slider-demo-block .el-slider {
-  margin-top: 0;
-  margin-left: 12px;
-}
-</style>
