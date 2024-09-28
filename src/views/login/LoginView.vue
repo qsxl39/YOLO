@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { postDoctorLoginAPI } from '@/api/user'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
 
 const router = useRouter()
 const returnLogin = () => {
@@ -17,18 +19,15 @@ const login = async () => {
   try {
     const res = await postDoctorLoginAPI(loginData.value.username, loginData.value.password)
     console.log(res)
-    if (res.code === 200) {
-      ElMessage.success('登录成功')
-      if (loginData.value.username === 'admin') {
-        userStore.setUser(loginData.value.username, 'admin')
-      } else {
-        userStore.setUser(loginData.value.username, 'doctor')
-      }
-      router.push('/current')
-      return
-    } else {
-      ElMessage.error(res.error)
-    }
+    // if (res.code === 200) {
+    //   userStore.setUser(loginData.value.username, loginData.value.password)
+    //   ElMessage.success('登录成功')
+
+    //   router.push('/current')
+    //   return
+    // } else {
+    //   ElMessage.error(res.error)
+    // }
   } catch {
     ElMessage.error('登录失败')
   }

@@ -1,5 +1,6 @@
 // 列表数据
 import { pages } from '@/api/user'
+import { http } from '@/utils/http'
 // export const page = async () => {
 //   console.log('已发送分页请求')
 //   const res = await pages()
@@ -7,7 +8,7 @@ import { pages } from '@/api/user'
 // }
 export const filterList = [
   {
-    img: ' http://74zbyd.natappfree.cc/media/channel1/人数统计-20240913-1357.jpg',
+    img: ` ${http}/media/channel1/人数统计-20240913-1357.jpg`,
     title: '嘉陵江2020年第1号洪水”在嘉陵江支流涪江形成',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),
@@ -16,7 +17,7 @@ export const filterList = [
     id: 1
   },
   {
-    img: 'http://www.sznews.com/news/pic/2020-08/13/0ea47d3c-feb9-4bd7-8597-a8a373aa6340c6ec12c7-3b33-4528-91a6-85ec8ca1df67_watermark.png',
+    img: `${http}/media/channel1/人数统计-20240913-1230.jpg`,
     title: '让《民法典》走近群众 盐田街道开展人民调解宣传活动',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),
@@ -25,7 +26,7 @@ export const filterList = [
     id: 2
   },
   {
-    img: 'http://www.sznews.com/photo/pic/2020-08/12/a08d6eb0-1d53-4f76-a313-ad3e5d701f98.jpg',
+    img: `${http}/media/channel1/人数统计-20240913-1400.jpg`,
     title: '记者手记：可可西里，“挪”向“藏羚羊大产房”的14个半小时',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),
@@ -34,7 +35,7 @@ export const filterList = [
     id: 3
   },
   {
-    img: 'http://www.sznews.com/photo/pic/2020-08/11/43cc0e14-9bca-45b9-9a8b-342e09d6a4c7.jpg',
+    img: `${http}/media/channel2/车辆统计-20240713-1430.jpg`,
     title: '以优异成绩庆祝深圳经济特区建立40周年',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),
@@ -43,7 +44,7 @@ export const filterList = [
     id: 4
   },
   {
-    img: 'http://www.sznews.com/photo/pic/2020-08/11/a4dc322b-68ec-40e6-8906-3124142c3e49.jpg',
+    img: `${http}/media/channel1/车辆统计-20240913-1230.jpg`,
     title: '草原上的“太阳姑娘”',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),
@@ -52,7 +53,7 @@ export const filterList = [
     id: 5
   },
   {
-    img: 'http://www.sznews.com/zhuanti/pic/2020-08/07/57f087b4-4812-46cc-adb9-ead73621284e.png',
+    img: `${http}/media/channel1/车辆统计-20240913-1330.jpg`,
     title: '奇观天下|带你走进非洲野生动物观光第一目的地',
     evaluate: (Math.random() * 10).toFixed(2),
     collection: (Math.random() * 100).toFixed(2),

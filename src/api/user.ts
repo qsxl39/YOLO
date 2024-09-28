@@ -7,19 +7,17 @@ import { http } from '@/utils/http'
  * @param Password 密码
  */
 export const postDoctorLoginAPI = (username: string, Password: string): any => {
-  // console.log({
-  //   username: username,
+  // return http.post('/login', {
+  //   account: username,
   //   password: Password
   // })
-  // const any = {
-  //   username: username,
-  //   password: Password
-  // }
-  // const json = JSON.stringify(any)
-  // console.log(json)
-  return http.post('/login', {
-    username: username,
-    password: Password
+  return http({
+    url: '/api/login',
+    method: 'post',
+    data: {
+      username: username,
+      password: Password
+    }
   })
 }
 /**
@@ -33,24 +31,28 @@ export const register = (
   passwordOne: string,
   passwordTwo: string
 ): any => {
-  const any = {
+  // const any = {
+  //   username: usernameRegister,
+  //   password_1: passwordOne,
+  //   password_2: passwordTwo
+  // }
+  // const json = JSON.stringify(any)
+  // console.log(json)
+  return http.post('/api/register', {
     username: usernameRegister,
     password_1: passwordOne,
     password_2: passwordTwo
-  }
-  const json = JSON.stringify(any)
-  console.log(json)
-  return http.post('/register', json)
+  })
 }
 
 //退出登录/logout
 export const logout = (): any => {
-  return http.post('/logout')
+  return http.post('/api/logout')
 }
 
 //分页  /alarm/query/pages
 export const pages = (): any => {
-  return http.post('/alarms/query/pages')
+  return http.post('/api/alarms/query/pages')
 }
 
 //图片查询/alarms/query/search
@@ -61,7 +63,7 @@ export const search = (
   pic_time_end: string
 ) => {
   // return http.post('/patients/save')
-  return http.post('/alarms/query/search', {
+  return http.post('/api/alarms/query/search', {
     pic_channel,
     pic_type,
     pic_time_start,
@@ -76,7 +78,7 @@ export const download = (
   pic_time_start: string,
   pic_time_end: string
 ): any => {
-  return http.post('/alarms/download', {
+  return http.post('/api/alarms/download', {
     pic_channel,
     pic_type,
     pic_time_start,
@@ -86,19 +88,19 @@ export const download = (
 
 //重启通道/channel/manage/restart/channel
 export const channel = (the_id: string): any => {
-  return http.post('/channel/manage/restart/channel', {
+  return http.post('/api/channel/manage/restart/channel', {
     the_id
   })
 }
 
 //重启配置/channel/manage/restart/setting
 export const restart = (the_id: string): any => {
-  return http.post('/channel/manage/restart/setting', { the_id })
+  return http.post('/api/channel/manage/restart/setting', { the_id })
 }
 
 //删除记录/alarms/query/delete
 export const queryDelete = (): any => {
-  return http.delete(`alarms/query/delete`)
+  return http.delete('/api/alarms/query/delete')
 }
 
 //通道管理设置
@@ -113,7 +115,7 @@ export const setting = (
   pinglv: string,
   updatetime: string
 ): any => {
-  return http.post('/channel/manage/setting', {
+  return http.post('/api/channel/manage/setting', {
     the_id,
     satuation,
     address,
@@ -128,13 +130,13 @@ export const setting = (
 
 //通道信息呈现
 export const show = (the_id: string) => {
-  return http.post('/alarms/current/show', { the_id })
+  return http.post('/api/alarms/current/show', { the_id })
 }
 
 //批量患者删除
 export const getDeleteAPI = (ids: string) => {
   console.log(ids)
-  return http.delete(`/patients/delete?ids=${ids}`)
+  return http.delete(`/api/patients/delete?ids=${ids}`)
 }
 //修改患者信息
 export const getUpdateAPI = (data: object) => {

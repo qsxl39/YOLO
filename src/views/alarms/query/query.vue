@@ -217,6 +217,7 @@ const rules = reactive<FormRules<RuleForm>>({
   ]
 })
 
+//图片查询
 import { search } from '@/api/user'
 
 const submitForm = async () => {
@@ -243,6 +244,7 @@ const submitForm = async () => {
   // })
 }
 
+//导出结果
 import { download } from '@/api/user'
 
 const resetForm = () => {
@@ -255,6 +257,7 @@ const resetForm = () => {
   // formEl.resetFields()
 }
 
+//删除记录
 import { queryDelete } from '@/api/user'
 
 const QueryDelete = () => {

@@ -33,6 +33,10 @@
       <template #default="scope">{{ scope.row.shijian }}</template>
     </el-table-column>
   </el-table>
+  <div class="dialog-footer" style="margin: 5px">
+    <el-button @click="restartChannel">重启通道</el-button>
+    <el-button @click="restartSetting">重置配置</el-button>
+  </div>
   <!-- 对话框 -->
   <HistoryDialog ref="HistoryDialogRef" />
 </template>
@@ -73,4 +77,24 @@ interface User {
 const store = tableDataStore();
 const tableData = computed(() => store.$state as User[]); // 使用 computed 来保持响应性   
 // 对话框
+
+// import { channel, setting, restart } from '@/api/user'
+
+//重启通道
+// const restartChannel = async () => {
+//   try {
+//     const res = await channel(tableData[0].number)
+
+//     console.log(res)
+//   } catch {}
+// }
+
+//重启配置
+// const restartSetting = async () => {
+//   try {
+//     const res = await restart(tableData[0].number)
+
+//     console.log(res)
+//   } catch {}
+// }
 </script>
