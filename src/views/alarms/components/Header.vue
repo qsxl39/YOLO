@@ -2,20 +2,41 @@
 import { RouterLink } from 'vue-router'
 import { RouterView } from 'vue-router'
 import { ArrowRight, SwitchButton } from '@element-plus/icons-vue'
-import { Ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { logout } from '@/api/user'
 import { Warning, Operation, VideoCamera, Picture, Calendar } from '@element-plus/icons-vue'
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+// 创建响应式变量来存储当前激活的菜单索引
+const activeMenuItem = ref('/')
+
+// 在组件挂载时从 localStorage 获取数据
+onMounted(() => {
+  const storedItem = localStorage.getItem('activeMenuItem')
+  if (storedItem) {
+    activeMenuItem.value = storedItem
+  }
+})
+
+// 设置激活菜单项的函数，同时更新 localStorage
+const setActiveMenuItem = (item) => {
+  activeMenuItem.value = item
+  localStorage.setItem('activeMenuItem', item)
 }
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+
+// 定义打开和关闭事件的一些处理函数
+const handleOpen = (index) => {
+  console.log(`Open: ${index}`)
 }
+
+const handleClose = (index) => {
+  console.log(`Close: ${index}`)
+}
+
+//退出登录
 const AllLogout = async () => {
   try {
     const res = await logout()
-    console.log(res)
+    localStorage.removeItem('user')
   } catch {}
 }
 </script>
@@ -31,7 +52,7 @@ const AllLogout = async () => {
         <SwitchButton />
       </el-icon>
     </RouterLink>
-    userName
+    say
   </el-header>
 
   <el-container style="max-width: 100vw">
@@ -41,16 +62,18 @@ const AllLogout = async () => {
         active-text-color="#ffd04b"
         background-color="#fff"
         class="el-menu-vertical-demo"
-        default-active="/"
+        :default-active="activeMenuItem"
         text-color="#000"
         @open="handleOpen"
         @close="handleClose"
       >
         <el-sub-menu index="1">
           <template #title>
-            <el-icon> <Warning /> </el-icon>告警中心
+            <el-icon>
+              <Warning /> </el-icon
+            >告警中心
           </template>
-          <el-menu-item index="1-1">
+          <el-menu-item index="1-1" @click="setActiveMenuItem('1-1')">
             <el-icon>
               <VideoCamera />
             </el-icon>
@@ -63,7 +86,7 @@ const AllLogout = async () => {
               实时告警
             </RouterLink>
           </el-menu-item>
-          <el-menu-item index="1-2">
+          <el-menu-item index="1-2" @click="setActiveMenuItem('1-2')">
             <el-icon>
               <Picture />
             </el-icon>
@@ -84,7 +107,7 @@ const AllLogout = async () => {
             </el-icon>
             <span>通道配置</span>
           </template>
-          <el-menu-item index="2-1">
+          <el-menu-item index="2-1" @click="setActiveMenuItem('2-1')">
             <el-icon>
               <Calendar />
             </el-icon>

@@ -1,26 +1,31 @@
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: (
         'primary': (
-            'base': #49998f,
+            // 'base': #49998f,
         ),
         'info':(
-            'base': #259df2
+            // 'base': #259df2
         )
     ),
 );
 .el-card{
     --el-card-border-radius:20px !important;
 }
-// .el-input__wrapper {
-//     box-shadow: none;
-// }
-// /* 移除 input 聚焦时的边框 */
-// .el-input__wrapper:hover {
-//     box-shadow: none !important;
-// }
-// .el-input__wrapper.is-focus {
-//     box-shadow: none !important;
-// }
+.el-input__wrapper {
+    box-shadow: none;
+}
+/* 移除 input 聚焦时的边框 */
+.el-input__wrapper:hover {
+    box-shadow: none !important;
+}
+.el-input__wrapper.is-focus {
+    box-shadow: none !important;
+}
+.el-input {
+
+    font-size: larger;
+    background-color: none;
+}
 .el-textarea__inner{
     padding: 8px 15px;
 }

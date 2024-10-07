@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 // const userStore = useUserStore()
+// console.log(userStore)
 
 export const http = axios.create({
-  baseURL: ' http://nc4n25.natappfree.cc'
-  // headers:
+  baseURL: '/api'
 })
 // 添加请求拦截器
 http.interceptors.request.use(
@@ -26,7 +26,7 @@ http.interceptors.response.use(
   (response) => {
     // 2xx 范围内的状态码触发该函数。
     console.log(response)
-    return response.data
+    return response
   },
   (error) => {
     // 超出 2xx 范围的状态码触发该函数。

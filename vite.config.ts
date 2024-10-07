@@ -15,9 +15,9 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: '', 
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        target: 'http://vqm7zp.natappfree.cc',
+        changeOrigin: true
+        // rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   },

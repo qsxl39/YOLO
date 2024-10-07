@@ -7,18 +7,24 @@ import { http } from '@/utils/http'
  * @param Password 密码
  */
 export const postDoctorLoginAPI = (username: string, Password: string): any => {
-  // return http.post('/login', {
-  //   account: username,
+  // const json = {
+  //   username: username,
   //   password: Password
-  // })
-  return http({
-    url: '/api/login',
-    method: 'post',
-    data: {
-      username: username,
-      password: Password
-    }
+  // }
+  // const a = JSON.stringify(json)
+  // console.log(a)
+  return http.post('/login', {
+    username: username,
+    password: Password
   })
+  //   return http({
+  // url: '/login',
+  // method: 'post',
+  // data: {
+  //   username: username,
+  //   password: Password
+  // }
+  //   })
 }
 /**
  * 注册 /register
@@ -31,28 +37,24 @@ export const register = (
   passwordOne: string,
   passwordTwo: string
 ): any => {
-  // const any = {
-  //   username: usernameRegister,
-  //   password_1: passwordOne,
-  //   password_2: passwordTwo
-  // }
-  // const json = JSON.stringify(any)
-  // console.log(json)
-  return http.post('/api/register', {
+  const any = {
     username: usernameRegister,
     password_1: passwordOne,
     password_2: passwordTwo
-  })
+  }
+  const json = JSON.stringify(any)
+  console.log(json)
+  return http.post('/register', json)
 }
 
 //退出登录/logout
 export const logout = (): any => {
-  return http.post('/api/logout')
+  return http.post('/logout')
 }
 
 //分页  /alarm/query/pages
 export const pages = (): any => {
-  return http.post('/api/alarms/query/pages')
+  return http.post('/alarms/query/pages')
 }
 
 //图片查询/alarms/query/search
@@ -62,8 +64,7 @@ export const search = (
   pic_time_start: string,
   pic_time_end: string
 ) => {
-  // return http.post('/patients/save')
-  return http.post('/api/alarms/query/search', {
+  return http.post('/alarms/query/search', {
     pic_channel,
     pic_type,
     pic_time_start,
@@ -77,66 +78,86 @@ export const download = (
   pic_type: string,
   pic_time_start: string,
   pic_time_end: string
-): any => {
-  return http.post('/api/alarms/download', {
-    pic_channel,
-    pic_type,
-    pic_time_start,
-    pic_time_end
+) => {
+  // return http.post('/alarms/query/download', {
+  //   pic_channel,
+  //   pic_type,
+  //   pic_time_start,
+  //   pic_time_end
+  // })
+  return http({
+    url: '/alarms/query/download',
+    method: 'post',
+    data: {
+      pic_channel,
+      pic_type,
+      pic_time_start,
+      pic_time_end
+    },
+    responseType: 'blob'
   })
 }
 
 //重启通道/channel/manage/restart/channel
 export const channel = (the_id: string): any => {
-  return http.post('/api/channel/manage/restart/channel', {
+  return http.post('/channel/manage/restart/channel', {
     the_id
   })
 }
 
 //重启配置/channel/manage/restart/setting
 export const restart = (the_id: string): any => {
-  return http.post('/api/channel/manage/restart/setting', { the_id })
+  return http.post('/channel/manage/restart/setting', { the_id })
 }
 
 //删除记录/alarms/query/delete
 export const queryDelete = (): any => {
-  return http.delete('/api/alarms/query/delete')
+  return http.delete(`alarms/query/delete`)
 }
 
 //通道管理设置
-export const setting = (
+export const newSetting = (
   the_id: string,
-  satuation: string,
+  // satuation: string,
   address: string,
   channel_name: string,
-  caqu_settings: string,
-  open_close: boolean,
-  degree: string,
-  pinglv: string,
-  updatetime: string
+  peo_open_close: boolean,
+  peo_degree: string,
+  peo_pinglv: string,
+  updatetime: string,
+  car_open_close: boolean,
+  car_degree: string,
+  car_pinglv: string
 ): any => {
-  return http.post('/api/channel/manage/setting', {
+  return http.post('/channel/manage/setting', {
     the_id,
-    satuation,
+    // satuation,
     address,
     channel_name,
-    caqu_settings,
-    open_close,
-    degree,
-    pinglv,
-    updatetime
+    peo_open_close,
+    peo_degree,
+    peo_pinglv,
+    updatetime,
+    car_open_close,
+    car_degree,
+    car_pinglv
   })
 }
 
 //通道信息呈现
 export const show = (the_id: string) => {
-  return http.post('/api/alarms/current/show', { the_id })
+  return http.post('/channel/manage/detail', { the_id })
+}
+
+//同步
+export const simulate = (the_id: string) => {
+  return http.post('/channel/manage/simulate', { the_id })
 }
 
 //批量患者删除
 export const getDeleteAPI = (ids: string) => {
   console.log(ids)
-  return http.delete(`/api/patients/delete?ids=${ids}`)
+  return http.delete(`/patients/delete?ids=${ids}`)
 }
 //修改患者信息
 export const getUpdateAPI = (data: object) => {

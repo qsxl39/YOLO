@@ -1,4 +1,4 @@
-import "./assets/main.scss"
+import './assets/main.scss'
 import './main.css'
 import 'element-plus/dist/index.css'
 import { createApp } from 'vue'
@@ -10,17 +10,17 @@ import '@kangc/v-md-editor/lib/theme/style/vuepress.css'
 import App from './App.vue'
 import Prism from 'prismjs'
 import router from './router'
-import myDialog from "./views/alarms/manage/myDialog.vue"
+import myDialog from './views/alarms/manage/myDialog.vue'
+// import { createPinia } from 'pinia'
 
 const app = createApp(App)
-
+// const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-
 VueMarkdownEditor.use(vuepressTheme, {
-  Prism,
-});
+  Prism
+})
 
 app.use(VueMarkdownEditor)
 

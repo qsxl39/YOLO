@@ -20,14 +20,12 @@ const router = createRouter({
       name: 'current',
       // component: () => import('@/views/alarms/current/current.vue'),
       component: Current
-      // meta: { requiresAuth: true }
     },
     {
       path: '/query',
       name: 'query',
       // component: () => import('@/views/alarms/current/query.vue'),
       component: Query
-      // meta: { requiresAuth: true }
     },
     {
       path: '/alarms',
@@ -58,26 +56,25 @@ const router = createRouter({
 })
 
 //路由守卫
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (!localStorage.getItem('userToken')) {
-//       next({
-//         path: '/login',
-//         query: { redirect: to.fullPath } // 重定向到登录页，并带上要跳转的页面
-//       })
-//     } else {
-//       next() // 确保一定要调用next()
-//     }
-//   } else {
-//     next() // 确保一定要调用next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!localStorage.getItem('user')) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath } // 重定向到登录页，并带上要跳转的页面
+      })
+    } else {
+      next() // 确保一定要调用next()
+    }
+  } else {
+    next() // 确保一定要调用next()
+  }
+})
 
-// import { http } from '@/utils/http'
-// import { useUserStore } from '@/stores/user'
-// const userStore = useUserStore()
-
-// //分页
+import { http } from '@/utils/http'
+import { pageStore } from '@/stores/page'
+// const page = pageStore()
+//分页
 // router.beforeEach((to, from, next) => {
 //   if (to.path === '/query') {
 //     http
@@ -86,7 +83,7 @@ const router = createRouter({
 //         console.log('分页成功')
 //         console.log(res)
 //         const { total, current_page, url } = res.data
-//         userStore.pageUser(total, current_page, url)
+//         page.setPage(total, current_page, url)
 //         next()
 //       })
 //       .catch((error) => {
@@ -98,7 +95,7 @@ const router = createRouter({
 //   }
 // })
 
-// //通道信息呈现
+//通道信息呈现
 // router.beforeEach((to, from, next) => {
 //   if (to.path === '/manage') {
 //     var the_id: number = 1
