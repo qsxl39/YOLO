@@ -31,24 +31,33 @@ const router = createRouter({
       path: '/alarms',
       name: 'alarms',
       component: () => import('../views/alarms/View.vue'),
+      meta:{
+        title:'首页'
+      },
       children: [
         {
           path: '/current',
           name: 'current',
           component: () => import('../views/alarms/current/current.vue'),
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true,
+                  title:'实时告警'
+        }
         },
         {
           path: '/query',
           name: 'query',
           component: () => import('../views/alarms/query/query.vue'),
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true,
+                  title:'告警查询'
+        }
         },
         {
           path: '/manage',
           name: 'manage',
           component: () => import('../views/alarms/manage/manage.vue'),
-          meta: { requiresAuth: true }
+          meta: { requiresAuth: true,
+                  title:'通道管理'
+        }
         }
       ]
     }
@@ -73,6 +82,7 @@ router.beforeEach((to, from, next) => {
 
 import { http } from '@/utils/http'
 import { pageStore } from '@/stores/page'
+import { title } from 'process'
 // const page = pageStore()
 //分页
 // router.beforeEach((to, from, next) => {

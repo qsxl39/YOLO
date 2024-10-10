@@ -9,7 +9,7 @@ export const pageStore = defineStore(
       current_page: '',
       url: []
     })
-    const setPage = (total: string, current_page: string, url) => {
+    const setPage = (total: string, current_page: string, url: any) => {
       page.value = { total, current_page, url }
     }
     return {

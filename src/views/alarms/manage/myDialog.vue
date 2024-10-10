@@ -55,7 +55,7 @@ interface User {
 }
 
 var dialogTableVisible = ref(false)
-const gridData = reactive([])
+const gridData: any = reactive([])
 let aaa = ref()
 
 const store = useDialogStore()
@@ -71,7 +71,6 @@ const { storedate } = storeToRefs(store)
 // ])
 
 import { show } from '@/api/user'
-import { stringify } from 'querystring'
 
 var the_id: string
 const openDialog = (number: string) => {
@@ -131,16 +130,16 @@ const saveChanges = async () => {
   const currentShow = async () => {
     const res = await show(the_id)
     console.log(res)
-    tableData.$state[the_id - 1].shijian = res.data.data.update_time
-    tableData.$state[the_id - 1].mingcheng = res.data.data.channel_name
-    tableData.$state[the_id - 1].dizhi = res.data.data.address
-    tableData.$state[the_id - 1].shijian = res.data.data.update_time
+    tableData.$state[+the_id - 1].shijian = res.data.data.update_time
+    tableData.$state[+the_id - 1].mingcheng = res.data.data.channel_name
+    tableData.$state[+the_id - 1].dizhi = res.data.data.address
+    tableData.$state[+the_id - 1].shijian = res.data.data.update_time
     if (res.data.data.satuation === '在线') {
-      tableData.$state[the_id - 1].zhuangtai = 'success'
+      tableData.$state[+the_id - 1].zhuangtai = 'success'
     } else if (res.data.data.satuation === '离线') {
-      tableData.$state[the_id - 1].zhuangtai = 'fail'
+      tableData.$state[+the_id - 1].zhuangtai = 'fail'
     } else {
-      tableData.$state[the_id - 1].zhuangtai = 'not_configured'
+      tableData.$state[+the_id - 1].zhuangtai = 'not_configured'
     }
   }
   currentShow()

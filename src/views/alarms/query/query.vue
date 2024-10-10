@@ -91,7 +91,9 @@
         </div>
       </div>
 
-      <div v-if="!paginatedData.length" class="filtering-no-data" style="height: 200px;">暂无数据</div>
+      <div v-if="!paginatedData.length" class="filtering-no-data" style="height: 200px">
+        暂无数据
+      </div>
 
       <!-- 分页组件 -->
       <el-pagination
@@ -352,11 +354,10 @@ const QueryDelete = async () => {
 import { ref, reactive, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { filterList } from './mock'
-import { title } from 'process'
 
 // 定义变量内容
 
-const dlRefs = ref<RefType[]>([])
+const dlRefs = ref([])
 const router = useRouter()
 const state = reactive({
   tableData: {

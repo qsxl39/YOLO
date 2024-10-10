@@ -154,46 +154,46 @@ export const simulate = (the_id: string) => {
   return http.post('/channel/manage/simulate', { the_id })
 }
 
-//批量患者删除
-export const getDeleteAPI = (ids: string) => {
-  console.log(ids)
-  return http.delete(`/patients/delete?ids=${ids}`)
-}
-//修改患者信息
-export const getUpdateAPI = (data: object) => {
-  return http({
-    url: '/patients/update',
-    method: 'put',
-    data
-  })
-}
-//条件查询患者
-export const getPatientConditionAPI = (params: any) => {
-  console.log(params)
-  //  return http.get(`/patients/condition?id=5&name=${form.name}&madicalRecord=${form.id}&sex=${form.sex}&treatmentPhase=${form.treatmentPhase}`)
-  return http.get(`/patients/condition`, {
-    params
-  })
-}
-//分页列表
+// //批量患者删除
+// export const getDeleteAPI = (ids: string) => {
+//   console.log(ids)
+//   return http.delete(`/patients/delete?ids=${ids}`)
+// }
+// //修改患者信息
+// export const getUpdateAPI = (data: object) => {
+//   return http({
+//     url: '/patients/update',
+//     method: 'put',
+//     data
+//   })
+// }
+// //条件查询患者
+// export const getPatientConditionAPI = (params: any) => {
+//   console.log(params)
+//   //  return http.get(`/patients/condition?id=5&name=${form.name}&madicalRecord=${form.id}&sex=${form.sex}&treatmentPhase=${form.treatmentPhase}`)
+//   return http.get(`/patients/condition`, {
+//     params
+//   })
+// }
+// //分页列表
 
-export const getPatientPageAPI = (currentPage: Number, pageSize: Number) => {
-  return http.get(`/patients/page?currentPage=${currentPage}&pageSize=${pageSize}`, {})
-}
-//导出治疗阶段
-export const getPatientsExportAPI = (userId: number, treatmentPhase: number) => {
-  return http.get(`/patients/export?userId={userId}&treatmentPhase={treatmentPhase}`, {
-    params: {
-      userId,
-      treatmentPhase
-    }
-  })
-}
-//导出治疗阶段全部
-export const getPatientExportAllAPI = (userId: number) => {
-  return http.get(`/patients/exportAll?userId={}`, {
-    params: {
-      userId
-    }
-  })
-}
+// export const getPatientPageAPI = (currentPage: Number, pageSize: Number) => {
+//   return http.get(`/patients/page?currentPage=${currentPage}&pageSize=${pageSize}`, {})
+// }
+// //导出治疗阶段
+// export const getPatientsExportAPI = (userId: number, treatmentPhase: number) => {
+//   return http.get(`/patients/export?userId={userId}&treatmentPhase={treatmentPhase}`, {
+//     params: {
+//       userId,
+//       treatmentPhase
+//     }
+//   })
+// }
+// //导出治疗阶段全部
+// export const getPatientExportAllAPI = (userId: number) => {
+//   return http.get(`/patients/exportAll?userId={}`, {
+//     params: {
+//       userId
+//     }
+//   })
+// }

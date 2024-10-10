@@ -67,7 +67,6 @@ import { Setting } from '@element-plus/icons-vue'
 import { defineAsyncComponent } from 'vue'
 import { ref, computed, onMounted } from 'vue'
 import { tableDataStore } from '@/stores/tableData'
-import { log } from 'util'
 // import { log } from 'console';
 // import { Row } from 'element-plus/es/components/table-v2/src/components/index.mjs';
 // console.log('@@@', tableDataStore.$id);
@@ -98,21 +97,18 @@ const tableData = computed(() => store.$state as User[]) // 使用 computed 来�
 import { channel, restart, newSetting, show } from '@/api/user'
 
 //通道信息呈现
-import { useDialogStore } from '@/stores/useDialogStore'
-import { before } from 'node:test'
-const storedate = useDialogStore()
 
-const currentShow = async (the_id) => {
+const currentShow = async (the_id: any) => {
   let res = await show(the_id)
-  tableData.value[the_id - 1].mingcheng = res.data.data.channel_name
-  tableData.value[the_id - 1].dizhi = res.data.data.address
-  tableData.value[the_id - 1].shijian = res.data.data.update_time
+  tableData.value[+the_id - 1].mingcheng = res.data.data.channel_name
+  tableData.value[+the_id - 1].dizhi = res.data.data.address
+  tableData.value[+the_id - 1].shijian = res.data.data.update_time
   if (res.data.data.satuation === '在线') {
-    tableData.value[the_id - 1].zhuangtai = 'success'
+    tableData.value[+the_id - 1].zhuangtai = 'success'
   } else if (res.data.data.satuation === '离线') {
-    tableData.value[the_id - 1].zhuangtai = 'fail'
+    tableData.value[+the_id - 1].zhuangtai = 'fail'
   } else {
-    tableData.value[the_id - 1].zhuangtai = 'not_configured'
+    tableData.value[+the_id - 1].zhuangtai = 'not_configured'
   }
 
   // storedate.storedate[the_id * 2].lingmindu = res.data.data.cdegree
@@ -144,11 +140,11 @@ function re() {
 //遍历序号并绑定按钮(重启通道)(重置配置)
 // 响应式数据
 
-const selectedRows = ref([])
+const selectedRows: any = ref([])
 const tableRef = ref(null)
 
 // 处理选中行变化
-const handleSelectionChange = (val) => {
+const handleSelectionChange = (val: any) => {
   selectedRows.value = val
 }
 // 重启通道

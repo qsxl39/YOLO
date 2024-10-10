@@ -17,4 +17,4 @@
 
 import { reactive } from 'vue'
 
-export const filterList = reactive([])
+export const filterList: any = reactive([])
